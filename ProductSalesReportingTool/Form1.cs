@@ -1,4 +1,8 @@
 using System.Data;
+using System.IO;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraRichEdit.Model;
+using Microsoft.Data.SqlClient;
 using ProductSalesReportingTool.Repositories;
 
 namespace ProductSalesReportingTool
@@ -8,38 +12,29 @@ namespace ProductSalesReportingTool
         public Form1()
         {
             InitializeComponent();
-            ReadSales();
         }
 
-        private void ReadSales()
+        private void btnGenerate_Click(object sender, EventArgs e)
         {
-            DataTable dataTable = new DataTable();
+            var startDate = this.dtpStartDate.Value.ToShortDateString();
+            var endDate = this.dtpEndDate.Value.ToShortDateString();
+            string reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Report1.repx");
 
-            dataTable.Columns.Add("ProductCode");
-            dataTable.Columns.Add("ProductName");
-            dataTable.Columns.Add("Quantity");
-            dataTable.Columns.Add("UnitPrice");
-            dataTable.Columns.Add("Total");
-            dataTable.Columns.Add("SaleDate");
+            XtraReport report = new XtraReport();
+            report.LoadLayout(reportPath);
 
-            var repo = new SaleRepository();
-            var sales = repo.GetSales();
+            //report.DataSource = null;
+            report.DataMember = "";
 
-            foreach(var sale in sales)
-            {
-                var row = dataTable.NewRow();
+            SaleRepository saleRepo = new SaleRepository();
+            var sales = saleRepo.GetSalesInRange(startDate, endDate);
 
-                row["ProductCode"] = sale.ProductCode;
-                row["ProductName"] = sale.ProductName;
-                row["Quantity"] = sale.Quantity;
-                row["UnitPrice"] = sale.UnitPrice;
-                row["Total"] = sale.Total;
-                row["SaleDate"] = sale.SaleDate;
+            if (sales.Rows.Count == 0) return;
 
-                dataTable.Rows.Add(row);
-            }
+            report.DataSource = sales;
 
-            this.salesTable.DataSource = dataTable;
+            ReportPrintTool print = new ReportPrintTool(report);
+            print.ShowRibbonPreview();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,45 +13,31 @@ namespace ProductSalesReportingTool.Repositories
     {
         private readonly string conString = "Data Source=DESKTOP-8PRJCMU\\STEPDB;Initial Catalog=SaleDb;User ID=sa;password=123;Trust Server Certificate=True;";
 
-        public List<SaleDto> GetSales()
+        public DataTable GetSalesInRange(string startDate, string endDate)
         {
-            var sales = new List<SaleDto>();
+            string sql = "select PRODUCTCODE, PRODUCTNAME, QUANTITY, UNITPRICE from PRODUCTSALES where SALEDATE between @startDate and @endDate";
 
-            try
+            DataTable dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(conString))
             {
-                using(SqlConnection con = new SqlConnection(conString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
-                    con.Open();
+                    cmd.Parameters.AddWithValue("@startDate", startDate);
+                    cmd.Parameters.AddWithValue("@endDate", endDate);
 
-                    string sql = "SELECT PRODUCTCODE, PRODUCTNAME, QUANTITY, UNITPRICE, SALEDATE FROM PRODUCTSALES";
-                    using(SqlCommand cmd = new SqlCommand(sql, con))
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
-                        using(SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while(reader.Read())
-                            {
-                                SaleDto sale = new SaleDto();
-                                sale.ProductCode = reader["PRODUCTCODE"].ToString();
-                                sale.ProductName = reader["PRODUCTNAME"].ToString();
-                                sale.Quantity = (int)reader["QUANTITY"];
-                                sale.UnitPrice = (decimal)reader["UNITPRICE"];
-                                sale.Total = sale.Quantity * sale.UnitPrice;
-                                sale.SaleDate = Convert.ToDateTime(reader["SALEDATE"]).ToString("dd-MMM-yyyy");
-
-
-                                sales.Add(sale);
-                            }
-                            con.Close();
-                        }
+                        da.Fill(dt);
                     }
                 }
-            } catch(Exception ex)
-            {
-                MessageBox.Show("Exception: " + ex.Message);
-                //Console.WriteLine("Exception: " + ex.Message);
             }
 
-            return sales;
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("No sale record!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return dt;
         }
     }
 }

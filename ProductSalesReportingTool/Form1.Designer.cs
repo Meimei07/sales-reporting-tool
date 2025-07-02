@@ -28,38 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            salesTable = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)salesTable).BeginInit();
+            dtpStartDate = new DateTimePicker();
+            dtpEndDate = new DateTimePicker();
+            btnGenerate = new Button();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
-            // salesTable
+            // dtpStartDate
             // 
-            salesTable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            salesTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            salesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            salesTable.Location = new Point(21, 108);
-            salesTable.MultiSelect = false;
-            salesTable.Name = "salesTable";
-            salesTable.RowHeadersVisible = false;
-            salesTable.RowHeadersWidth = 62;
-            salesTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            salesTable.Size = new Size(769, 330);
-            salesTable.TabIndex = 0;
+            dtpStartDate.CalendarFont = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpStartDate.CustomFormat = "yyyyMMMMdddd dd";
+            dtpStartDate.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpStartDate.Format = DateTimePickerFormat.Custom;
+            dtpStartDate.Location = new Point(236, 108);
+            dtpStartDate.Name = "dtpStartDate";
+            dtpStartDate.Size = new Size(314, 36);
+            dtpStartDate.TabIndex = 1;
+            // 
+            // dtpEndDate
+            // 
+            dtpEndDate.CalendarFont = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpEndDate.CustomFormat = "yyyyMMMMdddd dd";
+            dtpEndDate.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpEndDate.Format = DateTimePickerFormat.Custom;
+            dtpEndDate.Location = new Point(236, 189);
+            dtpEndDate.Name = "dtpEndDate";
+            dtpEndDate.Size = new Size(314, 36);
+            dtpEndDate.TabIndex = 2;
+            // 
+            // btnGenerate
+            // 
+            btnGenerate.BackColor = SystemColors.ButtonHighlight;
+            btnGenerate.Cursor = Cursors.Hand;
+            btnGenerate.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnGenerate.Location = new Point(294, 293);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(182, 55);
+            btnGenerate.TabIndex = 3;
+            btnGenerate.Text = "Generate Report";
+            btnGenerate.UseVisualStyleBackColor = false;
+            btnGenerate.Click += btnGenerate_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(236, 82);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 23);
+            label1.TabIndex = 4;
+            label1.Text = "Start Date:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(236, 163);
+            label2.Name = "label2";
+            label2.Size = new Size(90, 23);
+            label2.TabIndex = 5;
+            label2.Text = "End Date:";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(813, 450);
-            Controls.Add(salesTable);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(btnGenerate);
+            Controls.Add(dtpEndDate);
+            Controls.Add(dtpStartDate);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)salesTable).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private DataGridView salesTable;
+        private DateTimePicker dtpStartDate;
+        private DateTimePicker dtpEndDate;
+        private Button btnGenerate;
+        private Label label1;
+        private Label label2;
     }
 }
