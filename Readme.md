@@ -49,7 +49,7 @@ business system, allows user to select date range in order to query for sales re
 
 Configure database
 
-- Create a database table by running the 'script.sql' file, get from the SalesReportingTool folder
+- Create a database table by running the 'script.sql' file in the SSMS
 
 - Search for 'ProductSalesReportingTool.dll.config'
 
