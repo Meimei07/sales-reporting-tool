@@ -12,13 +12,12 @@ namespace ProductSalesReportingTool.Repositories
 {
     public class SaleRepository
     {
-        //private readonly string conString = "Data Source=DESKTOP-8PRJCMU\\STEPDB;Initial Catalog=SaleDb;User ID=sa;password=123;Trust Server Certificate=True;";
         string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public DataTable GetSalesInRange(string startDate, string endDate)
         {
             string sql = "select PRODUCTCODE, PRODUCTNAME, QUANTITY, UNITPRICE from PRODUCTSALES where SALEDATE between @startDate and @endDate";
-            MessageBox.Show(conString);
+            //MessageBox.Show(conString);
 
             DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(conString))
