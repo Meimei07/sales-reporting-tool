@@ -102,7 +102,7 @@
             Controls.Add(dtpEndDate);
             Controls.Add(dtpStartDate);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Sales Report";
             ResumeLayout(false);
             PerformLayout();
         }

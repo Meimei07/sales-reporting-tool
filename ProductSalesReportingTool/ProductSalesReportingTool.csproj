@@ -11,30 +11,47 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.Win.Design" Version="24.2.8" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="DevExpress.Data.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.Data.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Utils.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.Utils.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraBars.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.XtraBars.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.XtraEditors.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.XtraPrinting.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraReports.v24.2">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.XtraReports.v24.2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraReports.v24.2.Extensions">
       <HintPath>C:\Program Files\DevExpress 24.2\Components\Bin\Framework\DevExpress.XtraReports.v24.2.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Report1.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
